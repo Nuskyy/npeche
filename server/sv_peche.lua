@@ -1,6 +1,8 @@
 ESX = nil
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
+PlayerSelling = {}
+
 RegisterServerEvent('n:fishing')
 AddEventHandler('n:fishing', function()
     local xPlayer = ESX.GetPlayerFromId(source)
@@ -11,9 +13,11 @@ end)
 RegisterServerEvent('n:barquette')
 AddEventHandler('n:barquette', function()
     local xPlayer = ESX.GetPlayerFromId(source)
-    if xPlayer.getInventoryItem('poisson') >= 2 then 
+    local Barq = xPlayer.getInventoryItem('poisson').count
+    if Barq >= 2 then 
+        local xPlayer = ESX.GetPlayerFromId(source)
         xPlayer.removeInventoryItem('poisson', 2)
-        Citizen.Wait(10)
+        xPlayer.removeInventoryItem('barquette', 1)
         xPlayer.addInventoryItem('poissonbarquette', 1)
     end 
 end)
@@ -36,11 +40,9 @@ end
 RegisterServerEvent('n:ventepeche')
 AddEventHandler('n:ventepeche', function()
     if PlayerSelling[source] == false then 
-        ESX.ShowNotification('Tu n\'as rien a vendre ')
-        PlayerSelling[source] == false
+        PlayerSelling[source] = false
     else 
-        PlayerSelling[source] == true 
-        ESX.ShowNotification('~g~Vente~s~ en cours... ')
+        PlayerSelling[source] = true 
         sellbarquette()
     end
 end)
@@ -49,20 +51,19 @@ end)
 RegisterServerEvent('n:stopvente')
 AddEventHandler('n:stopvente', function()
     if PlayerSelling[source] == true then 
-        PlayerSelling[source] == false
+        PlayerSelling[source] = false
     else 
-        PlayerSelling[source] == false 
+        PlayerSelling[source] = false 
     end
 end)
 
 
 
 
-ESX.RegisterUsableItem('barquette'
-, function()
+ESX.RegisterUsableItem('canne', function(source)
+	TriggerClientEvent('n:startpeche', source)
+    Citizen.Wait(2000)
 end)
-
-ESX.RegisterUsableItem('canne'
-, function()
-    TriggerClientEvent('n:startpeche')
+ESX.RegisterUsableItem('barquette', function(source)
+	TriggerClientEvent('n:startbarquette', source)
 end)
