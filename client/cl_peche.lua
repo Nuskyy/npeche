@@ -19,7 +19,6 @@ AddEventHandler('n:startbarquette', function()
 end)
 function peche()
     local ped = GetPlayerPed(-1)
-    local pProps=GetHashKey("prop_fishing_rod_01")
     local time = 12000
     if pechetime and pechetime > GetGameTimer() then 
 		if notifCass then 
