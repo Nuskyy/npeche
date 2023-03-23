@@ -2,7 +2,7 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'pêche'
+description 'peche'
 author 'Nuskyy'
 version '0.0.1'
 
