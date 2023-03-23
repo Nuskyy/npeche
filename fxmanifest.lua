@@ -2,8 +2,8 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'Menu Admin'
-author 'Terminator'
+description 'pêche'
+author 'Nuskyy'
 version '0.0.1'
 
 
