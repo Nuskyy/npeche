@@ -8,7 +8,7 @@ version '0.0.1'
 
 
 client_scripts{
-    "pmenu.lua"
+    "pmenu.lua",
     "client/*.lua"
 }
 
